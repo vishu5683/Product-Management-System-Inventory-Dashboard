@@ -35,6 +35,7 @@ import ProductTable from "./components/ProductTable";
 import ProductForm from "./components/ProductForm";
 import Pagination from "./components/Pagination";
 import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
+import StatCard from "./components/StatCard";
 import useDebounce from "./hooks/useDebounce";
 
 const theme = createTheme({
@@ -484,12 +485,15 @@ function App() {
             mb: 4,
           }}
         >
-          <Container maxWidth="xl">
+          <Container 
+            maxWidth="xl"
+            sx={{ px: { xs: 2, sm: 3, md: 4 } }}
+          >
             <Stack
               direction={{ xs: "column", md: "row" }}
               justifyContent="space-between"
               alignItems={{ xs: "flex-start", md: "center" }}
-              spacing={3}
+              spacing={{ xs: 2, sm: 2.5, md: 3 }}
             >
               <Stack direction="row" alignItems="center" spacing={2}>
                 <Box
@@ -547,123 +551,55 @@ function App() {
           </Container>
         </Paper>
 
-        <Container maxWidth="xl" sx={{ pb: 6 }}>
+        <Container 
+          maxWidth="xl" 
+          sx={{ 
+            pb: { xs: 4, sm: 5, md: 6 },
+            px: { xs: 2, sm: 3, md: 4 },
+          }}
+        >
           {/* Statistics Cards */}
-          <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: { xs: 3, md: 4 } }}>
+          <Grid 
+            container 
+            spacing={{ xs: 2, sm: 2.5, md: 3 }} 
+            sx={{ mb: { xs: 3, sm: 3.5, md: 4 } }}
+          >
             <Grid item xs={12} sm={6} md={3}>
-              <Grow in timeout={300}>
-                <Card
-                  sx={{
-                    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                    color: "white",
-                    p: 3,
-                    height: "100%",
-                  }}
-                >
-                  <Stack 
-                    direction="row" 
-                    justifyContent="space-between" 
-                    alignItems="center"
-                    sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
-                  >
-                    <Box sx={{ flex: 1, minWidth: 0 }}>
-                      <Typography 
-                        variant="body2" 
-                        sx={{ 
-                          opacity: 0.9, 
-                          mb: 0.5,
-                          fontSize: { xs: "0.75rem", sm: "0.875rem" }
-                        }}
-                      >
-                        Total Products
-                      </Typography>
-                      <Typography 
-                      variant="h4" 
-                      fontWeight={700}
-                      sx={{ fontSize: { xs: "1.75rem", sm: "2rem", md: "2.125rem" } }}
-                    >
-                        {stats.totalProducts}
-                      </Typography>
-                    </Box>
-                    <Inventory sx={{ fontSize: { xs: 36, sm: 42, md: 48 }, opacity: 0.3 }} />
-                  </Stack>
-                </Card>
-              </Grow>
+              <StatCard
+                title="Total Products"
+                value={stats.totalProducts}
+                icon={Inventory}
+                gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                delay={300}
+              />
             </Grid>
-
             <Grid item xs={12} sm={6} md={3}>
-              <Grow in timeout={400}>
-                <Card
-                  sx={{
-                    background: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                    color: "white",
-                    p: 3,
-                    height: "100%",
-                  }}
-                >
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
-                        Low Stock Items
-                      </Typography>
-                      <Typography variant="h4" fontWeight={700}>
-                        {stats.lowStock}
-                      </Typography>
-                    </Box>
-                    <Warning sx={{ fontSize: 48, opacity: 0.3 }} />
-                  </Stack>
-                </Card>
-              </Grow>
+              <StatCard
+                title="Low Stock Items"
+                value={stats.lowStock}
+                icon={Warning}
+                gradient="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+                delay={400}
+              />
             </Grid>
-
             <Grid item xs={12} sm={6} md={3}>
-              <Grow in timeout={500}>
-                <Card
-                  sx={{
-                    background: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                    color: "white",
-                    p: 3,
-                    height: "100%",
-                  }}
-                >
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
-                        Total Stock
-                      </Typography>
-                      <Typography variant="h4" fontWeight={700}>
-                        {stats.totalStock}
-                      </Typography>
-                    </Box>
-                    <TrendingUp sx={{ fontSize: 48, opacity: 0.3 }} />
-                  </Stack>
-                </Card>
-              </Grow>
+              <StatCard
+                title="Total Stock"
+                value={stats.totalStock}
+                icon={TrendingUp}
+                gradient="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+                delay={500}
+              />
             </Grid>
-
             <Grid item xs={12} sm={6} md={3}>
-              <Grow in timeout={600}>
-                <Card
-                  sx={{
-                    background: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-                    color: "white",
-                    p: 3,
-                    height: "100%",
-                  }}
-                >
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
-                        Total Value
-                      </Typography>
-                      <Typography variant="h4" fontWeight={700}>
-                        ${(stats.totalValue / 1000).toFixed(1)}K
-                      </Typography>
-                    </Box>
-                    <AttachMoney sx={{ fontSize: 48, opacity: 0.3 }} />
-                  </Stack>
-                </Card>
-              </Grow>
+              <StatCard
+                title="Total Value"
+                value={stats.totalValue}
+                icon={AttachMoney}
+                gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+                delay={600}
+                formatValue={(val) => `$${(val / 1000).toFixed(1)}K`}
+              />
             </Grid>
           </Grid>
 
@@ -671,8 +607,8 @@ function App() {
           <Paper
             elevation={0}
             sx={{
-              p: 3,
-              mb: 4,
+              p: { xs: 2, sm: 2.5, md: 3 },
+              mb: { xs: 3, sm: 3.5, md: 4 },
               borderRadius: 3,
               background: "white",
               border: "1px solid",
@@ -680,9 +616,9 @@ function App() {
             }}
           >
             <Stack
-              direction={{ xs: "column", md: "row" }}
-              spacing={2}
-              alignItems="center"
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 2, sm: 2.5 }}
+              alignItems={{ xs: "stretch", sm: "center" }}
               justifyContent="space-between"
             >
               <TextField
@@ -692,14 +628,17 @@ function App() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Search sx={{ color: "text.secondary" }} />
+                      <Search sx={{ color: "text.secondary", fontSize: { xs: 18, sm: 20 } }} />
                     </InputAdornment>
                   ),
                 }}
                 sx={{
-                  minWidth: { xs: "100%", md: 400 },
+                  width: { xs: "100%", sm: "auto" },
+                  minWidth: { sm: 300, md: 400 },
+                  flex: { sm: 1, md: "none" },
                   "& .MuiOutlinedInput-root": {
                     backgroundColor: "background.default",
+                    fontSize: { xs: "0.875rem", sm: "1rem" },
                   },
                 }}
                 variant="outlined"
@@ -712,11 +651,14 @@ function App() {
                 onChange={(_, newView) => newView && setViewMode(newView)}
                 size="large"
                 sx={{
+                  width: { xs: "100%", sm: "auto" },
                   "& .MuiToggleButton-root": {
-                    px: 3,
-                    py: 1,
+                    px: { xs: 2, sm: 2.5, md: 3 },
+                    py: { xs: 1, sm: 1.25 },
                     borderRadius: 2,
                     fontWeight: 600,
+                    fontSize: { xs: "0.875rem", sm: "0.9375rem", md: "1rem" },
+                    flex: { xs: 1, sm: "none" },
                     "&.Mui-selected": {
                       backgroundColor: "primary.main",
                       color: "white",
@@ -728,12 +670,22 @@ function App() {
                 }}
               >
                 <ToggleButton value="list" aria-label="list view">
-                  <TableRows sx={{ mr: 1 }} />
-                  List View
+                  <TableRows sx={{ mr: { xs: 0.5, sm: 1 }, fontSize: { xs: 18, sm: 20 } }} />
+                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                    List View
+                  </Box>
+                  <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                    List
+                  </Box>
                 </ToggleButton>
                 <ToggleButton value="grid" aria-label="grid view">
-                  <GridView sx={{ mr: 1 }} />
-                  Grid View
+                  <GridView sx={{ mr: { xs: 0.5, sm: 1 }, fontSize: { xs: 18, sm: 20 } }} />
+                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                    Grid View
+                  </Box>
+                  <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                    Grid
+                  </Box>
                 </ToggleButton>
               </ToggleButtonGroup>
             </Stack>
@@ -771,18 +723,19 @@ function App() {
                   onDelete={handleDeleteClick}
                 />
               ) : (
-                <Box
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: {
-                      xs: "1fr",
-                      sm: "repeat(2, 1fr)",
-                      lg: "repeat(3, 1fr)",
-                      xl: "repeat(4, 1fr)",
-                    },
-                    gap: 3,
-                  }}
-                >
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  sm: "repeat(2, 1fr)",
+                  md: "repeat(2, 1fr)",
+                  lg: "repeat(3, 1fr)",
+                  xl: "repeat(4, 1fr)",
+                },
+                gap: { xs: 2, sm: 2.5, md: 3 },
+              }}
+            >
                   {currentProducts.map((product, index) => (
                     <Grow in timeout={300 + index * 50} key={product.id}>
                       <Box>
@@ -798,13 +751,27 @@ function App() {
               )}
 
               {totalPages > 1 && (
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+                <Box 
+                  sx={{ 
+                    display: "flex", 
+                    justifyContent: "center", 
+                    mt: { xs: 3, sm: 4, md: 5 },
+                    px: { xs: 1, sm: 0 },
+                  }}
+                >
                   <Pagination
                     count={totalPages}
                     page={currentPage}
                     onChange={(_, value) => setCurrentPage(value)}
                     color="primary"
                     size="large"
+                    sx={{
+                      "& .MuiPaginationItem-root": {
+                        fontSize: { xs: "0.75rem", sm: "0.875rem", md: "1rem" },
+                        minWidth: { xs: 32, sm: 36, md: 40 },
+                        height: { xs: 32, sm: 36, md: 40 },
+                      },
+                    }}
                   />
                 </Box>
               )}

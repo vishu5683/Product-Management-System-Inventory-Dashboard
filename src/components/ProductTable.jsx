@@ -6,15 +6,16 @@ import {
   TableHead,
   TableRow,
   Paper,
-  IconButton,
-  Tooltip,
   Typography,
   Box,
-  Chip,
   Stack,
   alpha,
 } from "@mui/material";
-import { Edit, Delete, Inventory } from "@mui/icons-material";
+import { Inventory } from "@mui/icons-material";
+import ActionButtons from "./ActionButtons";
+import CategoryChip from "./CategoryChip";
+import StockChip from "./StockChip";
+import PriceDisplay from "./PriceDisplay";
 
 export default function ProductTable({ products, onEdit, onDelete }) {
   return (
@@ -46,8 +47,7 @@ export default function ProductTable({ products, onEdit, onDelete }) {
               },
             }}
           >
-            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>Product</TableCell>
-            <TableCell sx={{ display: { xs: "table-cell", md: "table-cell" } }}>Product</TableCell>
+            <TableCell>Product</TableCell>
             <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>Category</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="right" sx={{ display: { xs: "none", lg: "table-cell" } }}>Stock</TableCell>
@@ -72,208 +72,89 @@ export default function ProductTable({ products, onEdit, onDelete }) {
                   "& td": {
                     borderBottom: "1px solid",
                     borderColor: "divider",
-                    py: 2.5,
+                    py: { xs: 1.5, sm: 2, md: 2.5 },
+                    px: { xs: 1, sm: 1.5, md: 2 },
                   },
                 }}
               >
-                <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+                <TableCell>
                   <Box>
-                    <Stack direction="row" alignItems="center" spacing={1.5} mb={0.5}>
+                    <Stack 
+                      direction="row" 
+                      alignItems="center" 
+                      spacing={{ xs: 1, sm: 1.5 }} 
+                      mb={{ xs: 0.5, md: 0.5 }}
+                    >
                       <Box
                         sx={{
-                          p: 0.75,
-                          borderRadius: 1.5,
+                          p: { xs: 0.5, sm: 0.75 },
+                          borderRadius: { xs: 1, sm: 1.5 },
                           backgroundColor: alpha("#6366f1", 0.1),
                           color: "primary.main",
                           display: "flex",
                           alignItems: "center",
+                          flexShrink: 0,
                         }}
                       >
-                        <Inventory sx={{ fontSize: 18 }} />
+                        <Inventory sx={{ fontSize: { xs: 14, sm: 18 } }} />
                       </Box>
-                      <Typography 
-                        variant="body1" 
-                        fontWeight={600}
-                        sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}
-                      >
-                        {product.name}
-                      </Typography>
-                    </Stack>
-                    {product.description && (
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{
-                          ml: 4.5,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 1,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {product.description}
-                      </Typography>
-                    )}
-                  </Box>
-                </TableCell>
-                <TableCell sx={{ display: { xs: "table-cell", md: "none" } }}>
-                  <Box>
-                    <Stack direction="row" alignItems="center" spacing={1} mb={0.5}>
-                      <Box
-                        sx={{
-                          p: 0.5,
-                          borderRadius: 1,
-                          backgroundColor: alpha("#6366f1", 0.1),
-                          color: "primary.main",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Inventory sx={{ fontSize: 14 }} />
+                      <Box sx={{ flex: 1, minWidth: 0 }}>
+                        <Typography 
+                          variant="body1" 
+                          fontWeight={600}
+                          sx={{ 
+                            fontSize: { xs: "0.875rem", sm: "1rem" },
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: { xs: "nowrap", md: "normal" },
+                          }}
+                        >
+                          {product.name}
+                        </Typography>
+                        {product.description && (
+                          <Typography
+                            variant="caption"
+                            color="text.secondary"
+                            sx={{
+                              display: { xs: "none", md: "-webkit-box" },
+                              WebkitLineClamp: 1,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                              mt: 0.25,
+                            }}
+                          >
+                            {product.description}
+                          </Typography>
+                        )}
+                        <Box 
+                          sx={{ 
+                            display: { xs: "flex", sm: "none" }, 
+                            gap: 0.5, 
+                            flexWrap: "wrap",
+                            mt: 0.5,
+                          }}
+                        >
+                          <CategoryChip category={product.category} />
+                          <StockChip stock={product.stock} />
+                        </Box>
                       </Box>
-                      <Typography 
-                        variant="body2" 
-                        fontWeight={600}
-                        sx={{ 
-                          fontSize: "0.875rem",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          maxWidth: "150px"
-                        }}
-                      >
-                        {product.name}
-                      </Typography>
                     </Stack>
-                    <Chip
-                      label={product.category}
-                      size="small"
-                      sx={{
-                        backgroundColor: alpha("#6366f1", 0.1),
-                        color: "primary.main",
-                        fontWeight: 600,
-                        border: "1px solid",
-                        borderColor: alpha("#6366f1", 0.3),
-                        fontSize: "0.7rem",
-                        height: "20px",
-                      }}
-                    />
-                    <Chip
-                      icon={<Inventory sx={{ fontSize: 12 }} />}
-                      label={`${product.stock} units`}
-                      size="small"
-                      sx={{
-                        ml: 0.5,
-                        backgroundColor: isLowStock
-                          ? alpha("#f59e0b", 0.1)
-                          : alpha("#10b981", 0.1),
-                        color: isLowStock ? "warning.dark" : "success.dark",
-                        fontWeight: 600,
-                        border: "1px solid",
-                        borderColor: isLowStock
-                          ? alpha("#f59e0b", 0.3)
-                          : alpha("#10b981", 0.3),
-                        fontSize: "0.7rem",
-                        height: "20px",
-                        "& .MuiChip-icon": {
-                          color: isLowStock ? "warning.dark" : "success.dark",
-                        },
-                      }}
-                    />
                   </Box>
                 </TableCell>
                 <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
-                  <Chip
-                    label={product.category}
-                    size="small"
-                    sx={{
-                      backgroundColor: alpha("#6366f1", 0.1),
-                      color: "primary.main",
-                      fontWeight: 600,
-                      border: "1px solid",
-                      borderColor: alpha("#6366f1", 0.3),
-                    }}
-                  />
+                  <CategoryChip category={product.category} />
                 </TableCell>
                 <TableCell align="right">
-                  <Typography
-                    variant="body1"
-                    fontWeight={700}
-                    sx={{
-                      fontSize: { xs: "0.875rem", sm: "1rem" },
-                      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                    }}
-                  >
-                    ${product.price.toFixed(2)}
-                  </Typography>
+                  <PriceDisplay price={product.price} variant="body1" />
                 </TableCell>
                 <TableCell align="right" sx={{ display: { xs: "none", lg: "table-cell" } }}>
-                  <Chip
-                    icon={<Inventory sx={{ fontSize: 14 }} />}
-                    label={`${product.stock} units`}
-                    size="small"
-                    sx={{
-                      backgroundColor: isLowStock
-                        ? alpha("#f59e0b", 0.1)
-                        : alpha("#10b981", 0.1),
-                      color: isLowStock ? "warning.dark" : "success.dark",
-                      fontWeight: 600,
-                      border: "1px solid",
-                      borderColor: isLowStock
-                        ? alpha("#f59e0b", 0.3)
-                        : alpha("#10b981", 0.3),
-                      "& .MuiChip-icon": {
-                        color: isLowStock ? "warning.dark" : "success.dark",
-                      },
-                    }}
-                  />
+                  <StockChip stock={product.stock} />
                 </TableCell>
                 <TableCell align="center">
-                  <Box sx={{ display: "inline-flex", gap: { xs: 0.25, sm: 0.5 } }}>
-                    <Tooltip title="Edit Product" arrow>
-                      <IconButton
-                        onClick={() => onEdit(product)}
-                        size="small"
-                        sx={{
-                          backgroundColor: alpha("#6366f1", 0.1),
-                          color: "primary.main",
-                          width: { xs: 32, sm: 36 },
-                          height: { xs: 32, sm: 36 },
-                          "&:hover": {
-                            backgroundColor: "primary.main",
-                            color: "white",
-                            transform: "scale(1.1)",
-                          },
-                          transition: "all 0.2s",
-                        }}
-                      >
-                        <Edit sx={{ fontSize: { xs: 16, sm: 18 } }} />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Delete Product" arrow>
-                      <IconButton
-                        onClick={() => onDelete(product.id, product.name)}
-                        size="small"
-                        sx={{
-                          backgroundColor: alpha("#ef4444", 0.1),
-                          color: "error.main",
-                          width: { xs: 32, sm: 36 },
-                          height: { xs: 32, sm: 36 },
-                          "&:hover": {
-                            backgroundColor: "error.main",
-                            color: "white",
-                            transform: "scale(1.1)",
-                          },
-                          transition: "all 0.2s",
-                        }}
-                      >
-                        <Delete sx={{ fontSize: { xs: 16, sm: 18 } }} />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
+                  <ActionButtons
+                    onEdit={() => onEdit(product)}
+                    onDelete={() => onDelete(product.id, product.name)}
+                  />
                 </TableCell>
               </TableRow>
             );
