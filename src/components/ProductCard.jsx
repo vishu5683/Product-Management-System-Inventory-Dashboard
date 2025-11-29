@@ -41,7 +41,7 @@ export default function ProductCard({ product, onEdit, onDelete }) {
       }}
       elevation={2}
     >
-      <CardContent sx={{ flexGrow: 1, p: 3 }}>
+      <CardContent sx={{ flexGrow: 1, p: { xs: 2, sm: 2.5, md: 3 } }}>
         {/* Header */}
         <Stack direction="row" justifyContent="space-between" alignItems="flex-start" mb={2}>
           <Chip
@@ -127,6 +127,7 @@ export default function ProductCard({ product, onEdit, onDelete }) {
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
+              fontSize: { xs: "1rem", sm: "1.125rem", md: "1.25rem" },
             }}
           >
             {product.name}
@@ -170,6 +171,7 @@ export default function ProductCard({ product, onEdit, onDelete }) {
                 variant="h5"
                 fontWeight={700}
                 sx={{
+                  fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
                   background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",

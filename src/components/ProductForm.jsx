@@ -207,8 +207,8 @@ export default function ProductForm({ open, initialProduct, onClose, onSave }) {
         </Box>
       </DialogTitle>
       <form onSubmit={handleSubmit}>
-        <DialogContent sx={{ pt: 3 }}>
-          <Grid container spacing={3}>
+        <DialogContent sx={{ pt: { xs: 2, sm: 3 } }}>
+          <Grid container spacing={{ xs: 2, sm: 3 }}>
             <Grid item xs={12}>
               <TextField
                 label="Product Name"

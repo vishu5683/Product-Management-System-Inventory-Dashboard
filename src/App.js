@@ -506,7 +506,13 @@ function App() {
                   <Typography variant="body2" sx={{ opacity: 0.9, fontWeight: 500 }}>
                     Product Management System
                   </Typography>
-                  <Typography variant="h4" fontWeight={700}>
+                  <Typography 
+                variant="h4" 
+                fontWeight={700}
+                sx={{
+                  fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" }
+                }}
+              >
                     Inventory Dashboard
                   </Typography>
                 </Box>
@@ -520,6 +526,8 @@ function App() {
                 sx={{
                   backgroundColor: "white",
                   color: "primary.main",
+                  width: { xs: "100%", sm: "auto" },
+                  mt: { xs: 2, sm: 0 },
                   "&:hover": {
                     backgroundColor: "rgba(255, 255, 255, 0.95)",
                     transform: "translateY(-2px)",
@@ -528,7 +536,12 @@ function App() {
                   transition: "all 0.3s ease",
                 }}
               >
-                Add New Product
+                <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                  Add New Product
+                </Box>
+                <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                  Add Product
+                </Box>
               </Button>
             </Stack>
           </Container>
@@ -536,7 +549,7 @@ function App() {
 
         <Container maxWidth="xl" sx={{ pb: 6 }}>
           {/* Statistics Cards */}
-          <Grid container spacing={3} sx={{ mb: 4 }}>
+          <Grid container spacing={{ xs: 2, sm: 3 }} sx={{ mb: { xs: 3, md: 4 } }}>
             <Grid item xs={12} sm={6} md={3}>
               <Grow in timeout={300}>
                 <Card
@@ -547,16 +560,32 @@ function App() {
                     height: "100%",
                   }}
                 >
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
-                    <Box>
-                      <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5 }}>
+                  <Stack 
+                    direction="row" 
+                    justifyContent="space-between" 
+                    alignItems="center"
+                    sx={{ flexWrap: { xs: "wrap", sm: "nowrap" } }}
+                  >
+                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                      <Typography 
+                        variant="body2" 
+                        sx={{ 
+                          opacity: 0.9, 
+                          mb: 0.5,
+                          fontSize: { xs: "0.75rem", sm: "0.875rem" }
+                        }}
+                      >
                         Total Products
                       </Typography>
-                      <Typography variant="h4" fontWeight={700}>
+                      <Typography 
+                      variant="h4" 
+                      fontWeight={700}
+                      sx={{ fontSize: { xs: "1.75rem", sm: "2rem", md: "2.125rem" } }}
+                    >
                         {stats.totalProducts}
                       </Typography>
                     </Box>
-                    <Inventory sx={{ fontSize: 48, opacity: 0.3 }} />
+                    <Inventory sx={{ fontSize: { xs: 36, sm: 42, md: 48 }, opacity: 0.3 }} />
                   </Stack>
                 </Card>
               </Grow>
