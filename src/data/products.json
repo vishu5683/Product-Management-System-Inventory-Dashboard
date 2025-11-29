@@ -1,0 +1,195 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15 Pro",
+    "price": 999,
+    "category": "Electronics",
+    "stock": 45,
+    "description": "Apple's latest flagship phone with titanium body and A17 chip."
+  },
+  {
+    "id": 2,
+    "name": "Noise Cancelling Headphones",
+    "price": 349,
+    "category": "Electronics",
+    "stock": 20,
+    "description": "Premium ANC headphones ideal for travel and focus time."
+  },
+  {
+    "id": 3,
+    "name": "Ergonomic Office Chair",
+    "price": 259,
+    "category": "Home",
+    "stock": 15,
+    "description": "Mesh back, adjustable lumbar support, and 4D armrests."
+  },
+  {
+    "id": 4,
+    "name": "Running Shoes",
+    "price": 139,
+    "category": "Sports",
+    "stock": 80,
+    "description": "Responsive cushioning designed for long distance runs."
+  },
+  {
+    "id": 5,
+    "name": "Smart Watch",
+    "price": 299,
+    "category": "Electronics",
+    "stock": 60,
+    "description": "Track workouts, sleep, temperature, and irregular heartbeats."
+  },
+  {
+    "id": 6,
+    "name": "Espresso Machine",
+    "price": 499,
+    "category": "Home",
+    "stock": 18,
+    "description": "Barista-grade espresso machine with automatic milk frother."
+  },
+  {
+    "id": 7,
+    "name": "4K Monitor",
+    "price": 429,
+    "category": "Electronics",
+    "stock": 32,
+    "description": "27-inch IPS display with HDR10 support and USB-C hub."
+  },
+  {
+    "id": 8,
+    "name": "Yoga Mat Pro",
+    "price": 79,
+    "category": "Sports",
+    "stock": 120,
+    "description": "Extra thick mat with anti-slip grip for all workouts."
+  },
+  {
+    "id": 9,
+    "name": "Desk Lamp",
+    "price": 69,
+    "category": "Home",
+    "stock": 55,
+    "description": "Adjustable brightness and color temperature with USB port."
+  },
+  {
+    "id": 10,
+    "name": "Travel Backpack",
+    "price": 159,
+    "category": "Fashion",
+    "stock": 70,
+    "description": "45L carry-on compliant backpack with modular compartments."
+  },
+  {
+    "id": 11,
+    "name": "Bluetooth Speaker",
+    "price": 119,
+    "category": "Electronics",
+    "stock": 110,
+    "description": "Portable waterproof speaker with 20-hour battery life."
+  },
+  {
+    "id": 12,
+    "name": "Mechanical Keyboard",
+    "price": 189,
+    "category": "Electronics",
+    "stock": 40,
+    "description": "Hot-swappable switches, per-key RGB, and aluminum body."
+  },
+  {
+    "id": 13,
+    "name": "Air Purifier",
+    "price": 249,
+    "category": "Home",
+    "stock": 22,
+    "description": "HEPA filtration removes 99.9% of airborne particles."
+  },
+  {
+    "id": 14,
+    "name": "Graphic Tablet",
+    "price": 329,
+    "category": "Electronics",
+    "stock": 25,
+    "description": "Pen display with laminated screen and tilt recognition."
+  },
+  {
+    "id": 15,
+    "name": "Camping Tent",
+    "price": 289,
+    "category": "Sports",
+    "stock": 35,
+    "description": "Four-season tent with quick setup system for 4 people."
+  },
+  {
+    "id": 16,
+    "name": "Portable Projector",
+    "price": 379,
+    "category": "Electronics",
+    "stock": 27,
+    "description": "Compact projector with 1080p resolution and built-in speakers."
+  },
+  {
+    "id": 17,
+    "name": "Electric Toothbrush",
+    "price": 99,
+    "category": "Home",
+    "stock": 95,
+    "description": "Pressure sensor, multiple modes, and wireless charging base."
+  },
+  {
+    "id": 18,
+    "name": "Smart Thermostat",
+    "price": 249,
+    "category": "Home",
+    "stock": 30,
+    "description": "Learns your schedule and reduces energy consumption."
+  },
+  {
+    "id": 19,
+    "name": "Gaming Mouse",
+    "price": 129,
+    "category": "Electronics",
+    "stock": 65,
+    "description": "High DPI wireless mouse with adjustable weights."
+  },
+  {
+    "id": 20,
+    "name": "Wireless Charger",
+    "price": 59,
+    "category": "Electronics",
+    "stock": 150,
+    "description": "3-in-1 charger for phone, earbuds, and smartwatch."
+  },
+  {
+    "id": 21,
+    "name": "Standing Desk",
+    "price": 499,
+    "category": "Home",
+    "stock": 19,
+    "description": "Electric height-adjustable desk with memory presets."
+  },
+  {
+    "id": 22,
+    "name": "Compact Drone",
+    "price": 899,
+    "category": "Electronics",
+    "stock": 10,
+    "description": "4K aerial footage with obstacle avoidance sensors."
+  },
+  {
+    "id": 23,
+    "name": "Leather Wallet",
+    "price": 79,
+    "category": "Fashion",
+    "stock": 90,
+    "description": "RFID blocking slim wallet with quick access slots."
+  },
+  {
+    "id": 24,
+    "name": "Cookware Set",
+    "price": 369,
+    "category": "Home",
+    "stock": 28,
+    "description": "Tri-ply stainless steel set compatible with induction."
+  }
+]
+

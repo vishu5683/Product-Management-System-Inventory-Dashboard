@@ -37,6 +37,7 @@ import Pagination from "./components/Pagination";
 import DeleteConfirmDialog from "./components/DeleteConfirmDialog";
 import StatCard from "./components/StatCard";
 import useDebounce from "./hooks/useDebounce";
+import productsData from "./data/products.json";
 
 const theme = createTheme({
   palette: {
@@ -167,207 +168,12 @@ const theme = createTheme({
   },
 });
 
-const MOCK_PRODUCTS = [
-  {
-    id: 1,
-    name: "iPhone 15 Pro",
-    price: 999,
-    category: "Electronics",
-    stock: 45,
-    description: "Apple's latest flagship phone with titanium body and A17 chip.",
-  },
-  {
-    id: 2,
-    name: "Noise Cancelling Headphones",
-    price: 349,
-    category: "Electronics",
-    stock: 20,
-    description: "Premium ANC headphones ideal for travel and focus time.",
-  },
-  {
-    id: 3,
-    name: "Ergonomic Office Chair",
-    price: 259,
-    category: "Home",
-    stock: 15,
-    description: "Mesh back, adjustable lumbar support, and 4D armrests.",
-  },
-  {
-    id: 4,
-    name: "Running Shoes",
-    price: 139,
-    category: "Sports",
-    stock: 80,
-    description: "Responsive cushioning designed for long distance runs.",
-  },
-  {
-    id: 5,
-    name: "Smart Watch",
-    price: 299,
-    category: "Electronics",
-    stock: 60,
-    description: "Track workouts, sleep, temperature, and irregular heartbeats.",
-  },
-  {
-    id: 6,
-    name: "Espresso Machine",
-    price: 499,
-    category: "Home",
-    stock: 18,
-    description: "Barista-grade espresso machine with automatic milk frother.",
-  },
-  {
-    id: 7,
-    name: "4K Monitor",
-    price: 429,
-    category: "Electronics",
-    stock: 32,
-    description: "27-inch IPS display with HDR10 support and USB-C hub.",
-  },
-  {
-    id: 8,
-    name: "Yoga Mat Pro",
-    price: 79,
-    category: "Sports",
-    stock: 120,
-    description: "Extra thick mat with anti-slip grip for all workouts.",
-  },
-  {
-    id: 9,
-    name: "Desk Lamp",
-    price: 69,
-    category: "Home",
-    stock: 55,
-    description: "Adjustable brightness and color temperature with USB port.",
-  },
-  {
-    id: 10,
-    name: "Travel Backpack",
-    price: 159,
-    category: "Fashion",
-    stock: 70,
-    description: "45L carry-on compliant backpack with modular compartments.",
-  },
-  {
-    id: 11,
-    name: "Bluetooth Speaker",
-    price: 119,
-    category: "Electronics",
-    stock: 110,
-    description: "Portable waterproof speaker with 20-hour battery life.",
-  },
-  {
-    id: 12,
-    name: "Mechanical Keyboard",
-    price: 189,
-    category: "Electronics",
-    stock: 40,
-    description: "Hot-swappable switches, per-key RGB, and aluminum body.",
-  },
-  {
-    id: 13,
-    name: "Air Purifier",
-    price: 249,
-    category: "Home",
-    stock: 22,
-    description: "HEPA filtration removes 99.9% of airborne particles.",
-  },
-  {
-    id: 14,
-    name: "Graphic Tablet",
-    price: 329,
-    category: "Electronics",
-    stock: 25,
-    description: "Pen display with laminated screen and tilt recognition.",
-  },
-  {
-    id: 15,
-    name: "Camping Tent",
-    price: 289,
-    category: "Sports",
-    stock: 35,
-    description: "Four-season tent with quick setup system for 4 people.",
-  },
-  {
-    id: 16,
-    name: "Portable Projector",
-    price: 379,
-    category: "Electronics",
-    stock: 27,
-    description: "Compact projector with 1080p resolution and built-in speakers.",
-  },
-  {
-    id: 17,
-    name: "Electric Toothbrush",
-    price: 99,
-    category: "Home",
-    stock: 95,
-    description: "Pressure sensor, multiple modes, and wireless charging base.",
-  },
-  {
-    id: 18,
-    name: "Smart Thermostat",
-    price: 249,
-    category: "Home",
-    stock: 30,
-    description: "Learns your schedule and reduces energy consumption.",
-  },
-  {
-    id: 19,
-    name: "Gaming Mouse",
-    price: 129,
-    category: "Electronics",
-    stock: 65,
-    description: "High DPI wireless mouse with adjustable weights.",
-  },
-  {
-    id: 20,
-    name: "Wireless Charger",
-    price: 59,
-    category: "Electronics",
-    stock: 150,
-    description: "3-in-1 charger for phone, earbuds, and smartwatch.",
-  },
-  {
-    id: 21,
-    name: "Standing Desk",
-    price: 499,
-    category: "Home",
-    stock: 19,
-    description: "Electric height-adjustable desk with memory presets.",
-  },
-  {
-    id: 22,
-    name: "Compact Drone",
-    price: 899,
-    category: "Electronics",
-    stock: 10,
-    description: "4K aerial footage with obstacle avoidance sensors.",
-  },
-  {
-    id: 23,
-    name: "Leather Wallet",
-    price: 79,
-    category: "Fashion",
-    stock: 90,
-    description: "RFID blocking slim wallet with quick access slots.",
-  },
-  {
-    id: 24,
-    name: "Cookware Set",
-    price: 369,
-    category: "Home",
-    stock: 28,
-    description: "Tri-ply stainless steel set compatible with induction.",
-  },
-];
-
 const ITEMS_PER_PAGE = 8;
 
 function App() {
-  const [products, setProducts] = useState(MOCK_PRODUCTS);
+  const [products, setProducts] = useState(productsData);
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -652,23 +458,69 @@ function App() {
                 size="large"
                 sx={{
                   width: { xs: "100%", sm: "auto" },
+                  gap: 0,
+                  "& .MuiToggleButtonGroup-grouped": {
+                    border: "1px solid",
+                    borderColor: "divider",
+                    "&:not(:first-of-type)": {
+                      borderLeft: "1px solid",
+                      borderColor: "divider",
+                      marginLeft: 0,
+                    },
+                    "&:first-of-type": {
+                      borderTopRightRadius: 0,
+                      borderBottomRightRadius: 0,
+                    },
+                    "&:last-of-type": {
+                      borderTopLeftRadius: 0,
+                      borderBottomLeftRadius: 0,
+                    },
+                  },
                   "& .MuiToggleButton-root": {
                     px: { xs: 2, sm: 2.5, md: 3 },
                     py: { xs: 1, sm: 1.25 },
-                    borderRadius: 2,
+                    borderRadius: 0,
                     fontWeight: 600,
                     fontSize: { xs: "0.875rem", sm: "0.9375rem", md: "1rem" },
                     flex: { xs: 1, sm: "none" },
+                    minWidth: { xs: "auto", sm: 120 },
+                    border: "1px solid",
+                    borderColor: "divider",
+                    "&:first-of-type": {
+                      borderTopLeftRadius: 8,
+                      borderBottomLeftRadius: 8,
+                      borderRight: "none",
+                    },
+                    "&:last-of-type": {
+                      borderTopRightRadius: 8,
+                      borderBottomRightRadius: 8,
+                      borderLeft: "none",
+                    },
                     "&.Mui-selected": {
                       backgroundColor: "primary.main",
                       color: "white",
+                      borderColor: "primary.main",
+                      zIndex: 1,
                       "&:hover": {
                         backgroundColor: "primary.dark",
+                        borderColor: "primary.dark",
                       },
+                    },
+                    "&:hover": {
+                      backgroundColor: "action.hover",
                     },
                   },
                 }}
               >
+                    <ToggleButton value="grid" aria-label="grid view">
+                  <GridView sx={{ mr: { xs: 0.5, sm: 1 }, fontSize: { xs: 18, sm: 20 } }} />
+                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                    Grid View
+                  </Box>
+                  <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                    Grid
+                  </Box>
+                </ToggleButton>
                 <ToggleButton value="list" aria-label="list view">
                   <TableRows sx={{ mr: { xs: 0.5, sm: 1 }, fontSize: { xs: 18, sm: 20 } }} />
                   <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
@@ -678,15 +530,7 @@ function App() {
                     List
                   </Box>
                 </ToggleButton>
-                <ToggleButton value="grid" aria-label="grid view">
-                  <GridView sx={{ mr: { xs: 0.5, sm: 1 }, fontSize: { xs: 18, sm: 20 } }} />
-                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
-                    Grid View
-                  </Box>
-                  <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
-                    Grid
-                  </Box>
-                </ToggleButton>
+            
               </ToggleButtonGroup>
             </Stack>
           </Paper>
